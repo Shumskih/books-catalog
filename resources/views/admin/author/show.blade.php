@@ -18,7 +18,7 @@
                 @foreach($author->books as $book)
                     <tr>
                         <td>
-                            <img src="{{ $book->cover }}" alt="" width="50" height="50" class="mr-2"> {{ $book->title }}
+                            <img src="/uploads/{{ $book->cover }}" alt="" width="50" height="50" class="mr-2"> {{ $book->title }}
                         </td>
                         <td>
                             <a href="{{ route('book.show', ['id' => $book->id]) }}"

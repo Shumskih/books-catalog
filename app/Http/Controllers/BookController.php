@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Author;
 use App\Models\Book;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class BookController extends Controller
@@ -18,6 +17,7 @@ class BookController extends Controller
     public function index()
     {
         $books = Book::all();
+
         return view('admin.book.index')->with('books', $books);
     }
 
@@ -29,6 +29,7 @@ class BookController extends Controller
     public function create()
     {
         $authors = Author::all();
+
         return view('admin.book.create')->with('authors', $authors);
     }
 
@@ -39,14 +40,12 @@ class BookController extends Controller
      */
     public function store()
     {
-        $book = Book::create($this->validateRequest());
+        $book    = Book::create($this->validateRequest());
         $authors = request()->get('author');
         foreach ($authors as $author) {
             $book->authors()->attach($author);
         }
         $this->storeImage($book);
-
-        Session::flash('success', "You successfully created a book");
 
         return redirect()->route('book.show', $book->id);
     }
@@ -61,6 +60,7 @@ class BookController extends Controller
     public function show($id)
     {
         $book = Book::find($id);
+
         return view('admin.book.show')->with('book', $book);
     }
 
@@ -73,8 +73,9 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-        $book = Book::find($id);
+        $book    = Book::find($id);
         $authors = Author::all();
+
         return view('admin.book.edit')->with(['book' => $book, 'authors' => $authors]);
     }
 
@@ -117,13 +118,11 @@ class BookController extends Controller
     {
         $book = Book::find($id);
 
-        if($book->cover) {
+        if ($book->cover) {
             $this->deleteImage($book);
         }
 
         $book->delete();
-
-        Session::flash('success', "You successfully deleted the book");
 
         return redirect()->route('books');
     }
@@ -134,7 +133,7 @@ class BookController extends Controller
             [
                 'title'        => 'required|min:1',
                 'description'  => 'required|min:10',
-                'num_of_pages' => 'required|numeric'
+                'num_of_pages' => 'required|numeric',
             ]
         ), function () {
             if (request()->hasFile('cover')) {
@@ -148,25 +147,26 @@ class BookController extends Controller
     private function storeImage($book)
     {
         if (request()->hasFile('cover')) {
-            $imageName = time().'.'.request()->cover->extension();
+            $imageName = time() . '.' . request()->cover->extension();
             $imageName = request()->cover->move(public_path('uploads'), $imageName);
             $imageName = explode(DIRECTORY_SEPARATOR, $imageName);
             $imageName = last($imageName);
+
             $book->update([
-                'cover' => $imageName
+                'cover' => $imageName,
             ]);
         }
     }
 
     private function deleteImage($book)
     {
-        unlink(public_path(DIRECTORY_SEPARATOR.'uploads'.DIRECTORY_SEPARATOR.$book->cover));
+        unlink(public_path(DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $book->cover));
     }
 
     private function checkImageAndDelete($book)
     {
-        if (request()->hasFile('cover') && file_exists('uploads'.DIRECTORY_SEPARATOR.$book->cover)) {
-            unlink(public_path(DIRECTORY_SEPARATOR.'uploads'.DIRECTORY_SEPARATOR.$book->cover));
+        if (request()->hasFile('cover') && file_exists('uploads' . DIRECTORY_SEPARATOR . $book->cover)) {
+            unlink(public_path(DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $book->cover));
         }
     }
 }

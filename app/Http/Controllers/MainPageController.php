@@ -6,6 +6,7 @@ use App\Models\Author;
 
 class MainPageController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *

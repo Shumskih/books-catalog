@@ -12,6 +12,7 @@
             <thead>
             <tr>
                 <th scope="col">Cover</th>
+                <th scope="col">Authors</th>
                 <th scope="col">Title</th>
                 <th scope="col">Pages</th>
                 <th scope="col">Actions</th>
@@ -21,7 +22,16 @@
             @foreach ($books as $book)
                 <tr>
                     <td>
-                        <img @if($book->cover) src="/uploads/{{ $book->cover }}" @else src="https://fakeimg.pl/350x200/?text=No Image" @endif alt="" width="50" height="50">
+                        <img @if($book->cover) src="/uploads/{{ $book->cover }}"
+                             @else src="https://fakeimg.pl/350x200/?text=No Image" @endif alt="" width="50" height="50">
+                    </td>
+                    <td>
+                        @foreach($book->authors as $author)
+                            {{ $author->surname }}, {{ $author->name }}
+                        @endforeach
+                        @if(count($book->authors) < 1)
+                            ==//==
+                        @endif
                     </td>
                     <td>
                         {{ $book->title }}
@@ -34,7 +44,8 @@
                            class="btn btn-outline-secondary">Show</a>
                         <a href="{{ route('book.edit', ['id' => $book->id]) }}"
                            class="btn btn-outline-info">Edit</a>
-                        <a href="{{ route('book.delete', ['id' => $book->id]) }}" class="btn btn-outline-danger">Delete</a>
+                        <a href="{{ route('book.delete', ['id' => $book->id]) }}"
+                           class="btn btn-outline-danger">Delete</a>
                     </td>
                 </tr>
             @endforeach

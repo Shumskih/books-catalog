@@ -16,6 +16,7 @@ class AuthorController extends Controller
     public function index()
     {
         $authors = Author::all();
+
         return view('admin.author.index')->with('authors', $authors);
     }
 
@@ -39,16 +40,7 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,
-            [
-                'name' => 'required',
-                'surname' => 'required'
-            ]
-        );
-
-        Author::create(request()->all());
-
-        Session::flash('success', "You successfully created an author");
+        Author::create($this->validateRequest());
 
         return redirect()->route('authors');
     }
@@ -90,16 +82,7 @@ class AuthorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request,
-            [
-                'name' => 'required',
-                'surname' => 'required'
-            ]
-        );
-
-        Author::updateOrCreate(['id'=>$id], request()->all());
-
-        Session::flash('success', "You successfully updated an author");
+        Author::updateOrCreate(['id'=>$id], $this->validateRequest());
 
         return redirect()->route('authors');
     }
@@ -115,8 +98,14 @@ class AuthorController extends Controller
         $author = Author::find($id);
         $author->delete();
 
-        Session::flash('success', "You successfully deleted an author");
-
         return redirect()->route('authors');
+    }
+
+    private function validateRequest()
+    {
+        return request()->validate([
+            'name' => 'required',
+            'surname' => 'required'
+        ]);
     }
 }

@@ -35,4 +35,7 @@
             </tbody>
         </table>
     </div>
+    <div class="row justify-content-center col-xl-12 mt-5">
+        {{ $authors->links() }}
+    </div>
 @endsection

@@ -14,7 +14,7 @@ class MainPageController extends Controller
      */
     public function index()
     {
-        $authors = Author::all();
+        $authors = Author::latest()->paginate(3);
         return view('author.index')->with('authors', $authors);
     }
 

@@ -21,4 +21,7 @@
             </ul>
         @endforeach
     </div>
+    <div class="row justify-content-center mt-5">
+        {{ $authors->links() }}
+    </div>
 @endsection

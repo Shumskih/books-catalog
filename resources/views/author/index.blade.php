@@ -4,6 +4,10 @@
 
 @section('content')
     <div class="container">
+        @if(Session::has('denied'))
+            <p class="alert alert-danger mt-3">{{ Session::get('denied') }}</p>
+        @endif
+
         @foreach ($authors as $author)
             <h5 class="mt-5">{{ $author->surname }}, {{ $author->name }}</h5>
             <ul class="list-group">

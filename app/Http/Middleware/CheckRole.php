@@ -3,10 +3,13 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class CheckRole
 {
+
     /**
      * Handle an incoming request.
      *
@@ -17,17 +20,23 @@ class CheckRole
      */
     public function handle($request, Closure $next)
     {
-        if (!$this->isAdmin()) {
+        if (!$this->roleAdmin()) {
+            $this->errorMessage();
             return redirect()->route('index');
         }
         return $next($request);
     }
 
-    public function isAdmin($role = 'admin')
+    private function roleAdmin()
     {
-        if ($role != 'admin') {
-            return false;
+        if (Auth::user()::isAdmin()) {
+            return true;
         }
-        return true;
+        return false;
+    }
+
+    private function errorMessage()
+    {
+        Session::flash('denied', 'Access denied!');
     }
 }

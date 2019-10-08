@@ -1,6 +1,10 @@
 # Authors And Books
 
 
-php artisan migrate
+php artisan migrate:fresh --seed
 
-php artisan db:seed
+#####Test user:
+
+login: Admin
+
+password: iamadmin

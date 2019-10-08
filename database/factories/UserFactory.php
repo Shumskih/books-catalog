@@ -1,6 +1,7 @@
 <?php
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
+
 use App\User;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
@@ -18,10 +19,10 @@ use Illuminate\Support\Str;
 
 $factory->define(User::class, function (Faker $faker) {
     return [
-        'name' => 'Aleksander Shumeiko',
-        'email' => 'music.dll@mail.ru',
+        'name'              => 'Admin',
+        'email'             => 'admin@mail.ru',
         'email_verified_at' => now(),
-        'password' => '$2y$10$lp2z.1RnjNrRudJp15CBE.SRZg6bXC.VD4eDN1b8Wsbydt1vt4GHe', // password
-        'remember_token' => Str::random(10),
+        'password'          => '$2y$10$LbL2bCMZyzv4HwXB6voxauh2D05BMh17RW/IaP0lkqWs3wSrXMhfq', // password
+        'remember_token'    => Str::random(10)
     ];
 });

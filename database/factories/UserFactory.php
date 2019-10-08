@@ -18,10 +18,10 @@ use Illuminate\Support\Str;
 
 $factory->define(User::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
+        'name' => 'Aleksander Shumeiko',
+        'email' => 'music.dll@mail.ru',
         'email_verified_at' => now(),
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'password' => '$2y$10$lp2z.1RnjNrRudJp15CBE.SRZg6bXC.VD4eDN1b8Wsbydt1vt4GHe', // password
         'remember_token' => Str::random(10),
     ];
 });

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAuthorBookTable extends Migration
+class CreateAuthorsBooksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAuthorBookTable extends Migration
      */
     public function up()
     {
-        Schema::create('author_book', function (Blueprint $table) {
+        Schema::create('authors_books', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('author_id')->unsigned();
             $table->bigInteger('book_id')->unsigned();

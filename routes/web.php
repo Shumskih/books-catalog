@@ -11,11 +11,17 @@
 |
 */
 
+use Illuminate\Support\Facades\Auth;
 use \Illuminate\Support\Facades\Route;
 
 Route::get('/', 'MainPageController@index')->name('index');
 
-Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+//Route::prefix('/admin')->middleware(['auth', 'role'])->group(function () {
+Route::group(
+    [
+        'prefix'     => 'admin',
+        'middleware' => ['auth', 'role'],
+    ], function () {
     // authors
     Route::get('/authors', 'AuthorController@index')->name('authors');
     Route::get('/author/create', 'AuthorController@create')->name('author.create');

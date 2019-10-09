@@ -36,6 +36,7 @@ class DatabaseSeeder extends Seeder
 
     private function deleteAndCreateDir() {
         if (file_exists('./public/uploads/')) {
+            $this->emptyDir();
             array_map('rmdir', glob('./public/uploads/'));
             mkdir('./public/uploads/', 0777, true);
         }
@@ -44,6 +45,12 @@ class DatabaseSeeder extends Seeder
     private function createDir() {
         if (!file_exists('./public/uploads/')) {
             mkdir('./public/uploads/', 0777, true);
+        }
+    }
+
+    private function emptyDir() {
+        foreach (glob('./public/uploads/*') as $file) {
+            unlink($file);
         }
     }
 }

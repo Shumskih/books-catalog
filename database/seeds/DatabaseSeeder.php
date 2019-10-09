@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->deleteAndCreateDir();
+        $this->createDir();
         factory(\App\Models\Author::class, 15)->create();
         factory(\App\Models\Book::class, 27)->create();
         factory(User::class, 1)->create();
@@ -30,5 +32,18 @@ class DatabaseSeeder extends Seeder
             'user_id' => 1,
             'role_id' => 1
         ]);
+    }
+
+    private function deleteAndCreateDir() {
+        if (file_exists('./public/uploads/')) {
+            array_map('rmdir', glob('./public/uploads/'));
+            mkdir('./public/uploads/', 0777, true);
+        }
+    }
+
+    private function createDir() {
+        if (!file_exists('./public/uploads/')) {
+            mkdir('./public/uploads/', 0777, true);
+        }
     }
 }

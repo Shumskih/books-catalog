@@ -1,0 +1,3 @@
+rustc rust/remove_dir.rs && move remove_dir.exe rust/ -yes &&  move remove_dir.pdb -yes rust/
+
+rustc rust/create_dir.rs && move create_dir.exe rust/ -yes &&  move create_dir.pdb -yes rust/

@@ -33,7 +33,7 @@ class BookController extends Controller
     public function update(Request $request, $id)
     {
         Book::find($id)->update($request->all());
-        return response(null, Response::HTTP_OK);
+        return response('Updated', Response::HTTP_ACCEPTED);
     }
 
     public function destroy($id)

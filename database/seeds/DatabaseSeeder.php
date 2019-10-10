@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->deleteAndCreateDir();
+        $this->deleteAndCreateOrCreateUploadsDir();
         factory(\App\Models\Author::class, 15)->create();
         factory(\App\Models\Book::class, 27)->create();
         factory(User::class, 1)->create();
@@ -33,21 +33,13 @@ class DatabaseSeeder extends Seeder
         ]);
     }
 
-    private function deleteAndCreateDir()
+    private function deleteAndCreateOrCreateUploadsDir()
     {
         if (file_exists('./public/uploads/')) {
-            $this->emptyDir();
-            array_map('rmdir', glob('./public/uploads/'));
-            mkdir('./public/uploads/', 0777, true);
+            exec('.\rust\remove_dir.exe');
+            exec('.\rust\create_dir.exe');
         } else {
-            mkdir('./public/uploads/', 0777, true);
-        }
-    }
-
-    private function emptyDir()
-    {
-        foreach (glob('./public/uploads/*') as $file) {
-            unlink($file);
+            exec('.\rust\create_dir.exe');
         }
     }
 }

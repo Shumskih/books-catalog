@@ -8,7 +8,7 @@
         <a href="{{ route('book.create') }}">Create new book</a>
     </div>
     <div class="row justify-content-center">
-        <table class="table table-hover col-lg-10 col-11 col-sm-12 col-md-9 col-xl-10">
+        <table class="table table-hover col-xl-12">
             <thead>
             <tr>
                 <th scope="col">Cover</th>

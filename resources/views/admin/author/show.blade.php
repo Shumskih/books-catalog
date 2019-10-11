@@ -6,7 +6,7 @@
     <h1 class="mt-5 mb-5 text-center">{{ $author->surname.', '.$author->name }}</h1>
     <h3 class="text-center mb-5">Books:</h3>
     <div class="row justify-content-center">
-        <table class="table table-hover col-lg-8 col-11 col-sm-11 col-md-8 col-xl-8">
+        <table class="table table-hover col-xl-10 col-lg-12 col-md-12 col-sm-12 col-12">
             <thead>
             <tr>
                 <th scope="col">Title</th>
@@ -18,7 +18,10 @@
                 @foreach($author->books as $book)
                     <tr>
                         <td>
-                            <img src="/uploads/{{ $book->cover }}" alt="" width="50" height="50" class="mr-2"> {{ $book->title }}
+                            <img @if($book->cover) src="/uploads/{{ $book->cover }}"
+                                 @else src="https://fakeimg.pl/350x200/?text=No Image"
+                                 @endif alt=""
+                                 width="50" height="50" class="mr-2"> {{ $book->title }}
                         </td>
                         <td>
                             <a href="{{ route('book.show', ['id' => $book->id]) }}"

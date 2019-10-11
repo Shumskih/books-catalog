@@ -8,7 +8,7 @@
         <a href="{{ route('author.create') }}">Create new author</a>
     </div>
     <div class="row justify-content-center">
-        <table class="table table-hover col-lg-8 col-11 col-sm-11 col-md-8 col-xl-8">
+        <table class="table table-hover">
             <thead>
             <tr>
                 <th scope="col">Authors</th>
@@ -35,7 +35,7 @@
             </tbody>
         </table>
     </div>
-    <div class="row justify-content-center col-xl-12 mt-5">
+    <div class="row justify-content-center mt-5">
         {{ $authors->links() }}
     </div>
 @endsection

@@ -16,7 +16,6 @@ use \Illuminate\Support\Facades\Route;
 
 Route::get('/', 'MainPageController@index')->name('index');
 
-//Route::prefix('/admin')->middleware(['auth', 'role'])->group(function () {
 Route::group(
     [
         'prefix'     => 'admin',

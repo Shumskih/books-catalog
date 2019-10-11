@@ -3,14 +3,16 @@
 @section('title', 'Authors')
 
 @section('content')
-    <div class="container">
-        @if(Session::has('denied'))
-            <p class="alert alert-danger mt-3">{{ Session::get('denied') }}</p>
-        @endif
+    @if(Session::has('denied'))
+        <p class="alert alert-danger mt-3">{{ Session::get('denied') }}</p>
+    @endif
 
-        @foreach ($authors as $author)
+    @foreach ($authors as $author)
+        <div class="row justify-content-xl-center">
             <h5 class="mt-5">{{ $author->surname }}, {{ $author->name }}</h5>
-            <ul class="list-group">
+        </div>
+        <div class="row justify-content-center">
+            <ul class="list-group col-xl-8">
                 @if(count($author->books) > 0)
                     @foreach($author->books as $book)
                         <li class="list-group-item"><img @if($book->cover) src="/uploads/{{ $book->cover }}"
@@ -21,10 +23,10 @@
                 @else
                     <li class="list-group-item">No Books</li>
                 @endif
-
             </ul>
-        @endforeach
-    </div>
+        </div>
+    @endforeach
+
     <div class="row justify-content-center mt-5">
         {{ $authors->links() }}
     </div>

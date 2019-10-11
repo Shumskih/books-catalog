@@ -1,3 +1,9 @@
-rustc rust/remove_dir.rs && move remove_dir.exe rust/ &&  move remove_dir.pdb rust/
+Windows:
+        rustc rust/remove_dir.rs && move remove_dir.exe rust/ &&  move remove_dir.pdb rust/
 
-rustc rust/create_dir.rs && move create_dir.exe rust/ &&  move create_dir.pdb rust/
+        rustc rust/create_dir.rs && move create_dir.exe rust/ &&  move create_dir.pdb rust/
+
+Linux:
+    rustc rust/remove_dir.rs && mv remove_dir rust/
+
+    rustc rust/create_dir.rs && mv create_dir rust/

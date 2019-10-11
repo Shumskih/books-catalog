@@ -35,11 +35,15 @@ class DatabaseSeeder extends Seeder
 
     private function deleteAndCreateOrCreateUploadsDir()
     {
-        if (file_exists('./public/uploads/')) {
-            exec('.\rust\remove_dir.exe');
-            exec('.\rust\create_dir.exe');
+        $fileName = '.'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'uploads'.DIRECTORY_SEPARATOR;
+        $removeDirScript = '.'.DIRECTORY_SEPARATOR.'rust'.DIRECTORY_SEPARATOR.'remove_dir.exe';
+        $createDirScript = '.'.DIRECTORY_SEPARATOR.'rust'.DIRECTORY_SEPARATOR.'create_dir.exe';
+
+        if (file_exists($fileName)) {
+            exec($removeDirScript);
+            exec($createDirScript);
         } else {
-            exec('.\rust\create_dir.exe');
+            exec($createDirScript);
         }
     }
 }

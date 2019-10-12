@@ -23,4 +23,31 @@ class RustScriptWindows extends RustScript
         }
     }
 
+    public function removeScriptDir()
+    {
+        return sprintf(".%srust%scompiled%swindows%sremove_dir",
+            DIRECTORY_SEPARATOR,
+            DIRECTORY_SEPARATOR,
+            DIRECTORY_SEPARATOR,
+            DIRECTORY_SEPARATOR);
+    }
+
+    public function createScriptDir()
+    {
+        return sprintf(".%srust%scompiled%swindows%screate_dir",
+            DIRECTORY_SEPARATOR,
+            DIRECTORY_SEPARATOR,
+            DIRECTORY_SEPARATOR,
+            DIRECTORY_SEPARATOR);
+    }
+
+    public function createFolder()
+    {
+        exec($this->createScriptDir());
+    }
+
+    public function removeFolder()
+    {
+        exec($this->removeScriptDir());
+    }
 }

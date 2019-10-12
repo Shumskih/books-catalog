@@ -19,4 +19,31 @@ class RustScriptLinux extends RustScript
         return false;
     }
 
+    public function removeScriptDir()
+    {
+        return sprintf(".%srust%scompiled%slinux%sremove_dir",
+            DIRECTORY_SEPARATOR,
+            DIRECTORY_SEPARATOR,
+            DIRECTORY_SEPARATOR,
+            DIRECTORY_SEPARATOR);
+    }
+
+    public function createScriptDir()
+    {
+        return sprintf(".%srust%scompiled%slinux%screate_dir",
+            DIRECTORY_SEPARATOR,
+            DIRECTORY_SEPARATOR,
+            DIRECTORY_SEPARATOR,
+            DIRECTORY_SEPARATOR);
+    }
+
+    public function createFolder()
+    {
+        exec($this->createScriptDir());
+    }
+
+    public function removeFolder()
+    {
+        exec($this->removeScriptDir());
+    }
 }

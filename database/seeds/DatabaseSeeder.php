@@ -21,6 +21,12 @@ class DatabaseSeeder extends Seeder
         if (!$rustScripts->isScriptsExists()) {
             $rustScripts->compile();
         }
+        if (!$rustScripts->isUploadsDirExists()) {
+            $rustScripts->createFolder();
+        } else {
+            $rustScripts->removeFolder();
+            $rustScripts->createFolder();
+        }
         //        factory(\App\Models\Author::class, 15)->create();
         //        factory(\App\Models\Book::class, 27)->create();
         //        factory(User::class, 1)->create();
@@ -35,35 +41,5 @@ class DatabaseSeeder extends Seeder
         //            'user_id' => 1,
         //            'role_id' => 1,
         //        ]);
-    }
-
-    private function deleteAndCreateOrCreateUploadsDirLinux()
-    {
-        $fileName        = sprintf(".%spublic%suploads%s", DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR,
-            DIRECTORY_SEPARATOR);
-        $removeDirScript = sprintf(".%srust%sremove_dir", DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR);
-        $createDirScript = sprintf(".%srust%screate_dir", DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR);
-
-        if (file_exists($fileName)) {
-            exec($removeDirScript);
-            exec($createDirScript);
-        } else {
-            exec($createDirScript);
-        }
-    }
-
-    private function deleteAndCreateOrCreateUploadsDirWindows()
-    {
-        $fileName        = sprintf(".%spublic%suploads%s", DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR,
-            DIRECTORY_SEPARATOR);
-        $removeDirScript = sprintf(".%srust%sremove_dir.exe", DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR);
-        $createDirScript = sprintf(".%srust%screate_dir.exe", DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR);
-
-        if (file_exists($fileName)) {
-            exec($removeDirScript);
-            exec($createDirScript);
-        } else {
-            exec($createDirScript);
-        }
     }
 }

@@ -2,7 +2,8 @@
 
 namespace App\Console;
 
-use App\Console\Commands\RustScriptsRun;
+use App\Console\Commands\CleanStorageDirRun;
+use App\Console\Commands\SeedDbAndCleanStorage;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -14,7 +15,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        RustScriptsRun::class,
+        CleanStorageDirRun::class,
     ];
 
     /**

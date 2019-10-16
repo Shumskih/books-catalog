@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Author;
 use App\Models\Book;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
@@ -148,9 +149,7 @@ class BookController extends Controller
     {
         if (request()->hasFile('cover')) {
             $imageName = time() . '.' . request()->cover->extension();
-            $imageName = request()->cover->move(public_path('uploads'), $imageName);
-            $imageName = explode(DIRECTORY_SEPARATOR, $imageName);
-            $imageName = last($imageName);
+            Storage::disk('local')->put($imageName, File::get(request()->cover));
 
             $book->update([
                 'cover' => $imageName,
@@ -160,13 +159,13 @@ class BookController extends Controller
 
     private function deleteImage($book)
     {
-        unlink(public_path(DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $book->cover));
+        Storage::delete($book->cover);
     }
 
     private function checkImageAndDelete($book)
     {
-        if (request()->hasFile('cover') && file_exists('uploads' . DIRECTORY_SEPARATOR . $book->cover)) {
-            unlink(public_path(DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $book->cover));
+        if (request()->hasFile('cover') && file_exists('storage' . DIRECTORY_SEPARATOR . $book->cover)) {
+            $this->deleteImage($book);
         }
     }
 }

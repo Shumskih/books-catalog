@@ -4,8 +4,8 @@
 
 @section('content')
     <div class="row justify-content-center mt-5">
-        <img @if($book->cover) src="/uploads/{{ $book->cover }}" @else src="https://fakeimg.pl/350x200/?text=No Image"
-             @endif alt="..." class="img-thumbnail col-xl-4">
+        <img @if($book->cover) src="/storage/{{ $book->cover }}" @else src="https://fakeimg.pl/350x200/?text=No Image"
+             @endif alt="{{ $book->title }}" class="img-thumbnail col-xl-4">
         <div class="col-xl-8 pl-4">
             <div class="row">
                 <h1 class="">{{ $book->title }}</h1>

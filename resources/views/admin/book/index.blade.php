@@ -22,8 +22,8 @@
             @foreach ($books as $book)
                 <tr>
                     <td>
-                        <img @if($book->cover) src="/uploads/{{ $book->cover }}"
-                             @else src="https://fakeimg.pl/350x200/?text=No Image" @endif alt="" width="50" height="50">
+                        <img @if($book->cover) src="/storage/{{ $book->cover }}"
+                             @else src="https://fakeimg.pl/350x200/?text=No Image" @endif alt="{{ $book->title }}" width="50" height="50">
                     </td>
                     <td>
                         @foreach($book->authors as $author)

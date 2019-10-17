@@ -1,6 +1,5 @@
 <?php
 
-use App\Custom\Facades\CleanStorageDir;
 use App\User;
 use App\Models\Role;
 use Illuminate\Database\Seeder;

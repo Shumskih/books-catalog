@@ -8,10 +8,12 @@ namespace App\Custom\Services\CleanStorageDir;
  */
 class CleanStorageDir
 {
+
     /**
      * @param string $pathPattern glob
      */
-    public function clean($pathPattern = "./public/storage/*.*") {
+    public function clean($pathPattern = "./public/storage/*.*")
+    {
         array_map('unlink', glob($pathPattern));
     }
 }

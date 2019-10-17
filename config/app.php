@@ -165,7 +165,6 @@ return [
         /*
          * Package Service Providers...
          */
-        App\Providers\RustScriptsServiceProvider::class,
         App\Providers\CleanStorageDirServiceProvider::class,
 
         /*
@@ -227,8 +226,7 @@ return [
         'URL'             => Illuminate\Support\Facades\URL::class,
         'Validator'       => Illuminate\Support\Facades\Validator::class,
         'View'            => Illuminate\Support\Facades\View::class,
-        'RustScripts'     => App\Custom\Facades\RustScripts::class,
-        'CleanStorageDir' => App\Custom\Facades\CleanStorageDir::class,
+        'CleanStorageDir' => App\Custom\Facades\CleanStorageDirService::class,
     ],
 
 ];

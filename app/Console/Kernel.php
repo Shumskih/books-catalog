@@ -3,7 +3,6 @@
 namespace App\Console;
 
 use App\Console\Commands\CleanStorageDirRun;
-use App\Console\Commands\SeedDbAndCleanStorage;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 

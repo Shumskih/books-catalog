@@ -3,11 +3,14 @@
 namespace App\Providers;
 
 use App\Custom\Services\CleanStorageDir\CleanStorageDir;
-use Illuminate\Contracts\Support\DeferrableProvider;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 
-class CleanStorageDirServiceProvider extends ServiceProvider implements DeferrableProvider
+class CleanStorageDirServiceProvider extends ServiceProvider
 {
+
+    protected $defer = true;
+
     /**
      * Register services.
      *
@@ -15,7 +18,14 @@ class CleanStorageDirServiceProvider extends ServiceProvider implements Deferrab
      */
     public function register()
     {
-        $this->app->bind('cleanStorageDir', 'App\Custom\Services\CleanStorageDir\CleanStorageDir');
+        App::bind('cleanStorageDir', function() {
+            return new CleanStorageDir;
+        });
+    }
+
+    public function provides()
+    {
+        return [CleanStorageDir::class];
     }
 
     /**
@@ -25,6 +35,6 @@ class CleanStorageDirServiceProvider extends ServiceProvider implements Deferrab
      */
     public function boot()
     {
-        return [CleanStorageDir::class];
+
     }
 }

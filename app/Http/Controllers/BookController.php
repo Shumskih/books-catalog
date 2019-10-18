@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\BookAdded;
 use App\Models\Author;
 use App\Models\Book;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
@@ -47,6 +51,9 @@ class BookController extends Controller
             $book->authors()->attach($author);
         }
         $this->storeImage($book);
+
+        $user = User::find(Auth::user()->getAuthIdentifier());
+        Mail::to($user->email)->send(new BookAdded($user, $book));
 
         return redirect()->route('book.show', $book->id);
     }

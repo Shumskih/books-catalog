@@ -8,6 +8,6 @@ http://84.201.186.9/
 
 ####Test user:
 
-login: Admin
+login: admin@mail.ru
 
 password: iamadmin

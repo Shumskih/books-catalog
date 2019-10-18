@@ -166,6 +166,7 @@ return [
          * Package Service Providers...
          */
         App\Providers\CleanStorageDirServiceProvider::class,
+        NotificationChannels\Telegram\TelegramServiceProvider::class,
 
         /*
          * Application Service Providers...

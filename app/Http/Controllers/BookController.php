@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\BookAdded;
+use App\Events\NewBookAddedEvent;
+use App\Mail\BookAddedMail;
 use App\Models\Author;
 use App\Models\Book;
 use App\User;
@@ -53,7 +54,7 @@ class BookController extends Controller
         $this->storeImage($book);
 
         $user = User::find(Auth::user()->getAuthIdentifier());
-        Mail::to($user->email)->send(new BookAdded($user, $book));
+        event(new NewBookAddedEvent($user, $book));
 
         return redirect()->route('book.show', $book->id);
     }

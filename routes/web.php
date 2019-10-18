@@ -19,7 +19,7 @@ Route::get('/', 'MainPageController@index')->name('index');
 Route::group(
     [
         'prefix'     => 'admin',
-        'middleware' => ['auth', 'role'],
+        'middleware' => ['auth', 'role', 'verified'],
     ], function () {
     // authors
     Route::get('/authors', 'AuthorController@index')->name('authors');
@@ -41,4 +41,4 @@ Route::group(
 });
 
 
-Auth::routes();
+Auth::routes(['verify' => true]);

@@ -47,5 +47,5 @@ Route::get('mailable', function () {
     $user = App\User::find(1);
     $book = App\Models\Book::find(37);
 
-    return new App\Mail\BookAdded($user, $book);
+    return new App\Mail\BookAddedMail($user, $book);
 });

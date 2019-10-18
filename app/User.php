@@ -62,4 +62,13 @@ class User extends Authenticatable implements MustVerifyEmail
         return false;
 
     }
+
+    public function routeNotificationForSlack() {
+        return env('SLACK_WEBHOOK_URL');
+    }
+
+    public function routeNotificationForMail($notification)
+    {
+        return $this->email;
+    }
 }

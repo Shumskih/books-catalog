@@ -166,6 +166,7 @@ return [
          * Package Service Providers...
          */
         App\Providers\CleanStorageDirServiceProvider::class,
+        App\Providers\MessageServiceProvider::class,
         NotificationChannels\Telegram\TelegramServiceProvider::class,
 
         /*
@@ -228,6 +229,7 @@ return [
         'Validator'       => Illuminate\Support\Facades\Validator::class,
         'View'            => Illuminate\Support\Facades\View::class,
         'CleanStorageDir' => App\Custom\Facades\CleanStorageDirService::class,
+        'Message'         => App\Custom\Facades\MessagesService::class,
     ],
 
 ];

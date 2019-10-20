@@ -18,11 +18,13 @@ use Illuminate\Support\Str;
 */
 
 $factory->define(User::class, function (Faker $faker) {
+
     return [
+
         'name'              => 'Admin',
-        'email'             => 'music.dll@mail.ru',
-        'email_verified_at' =>  now(),
-        'password'          => '$2y$10$LbL2bCMZyzv4HwXB6voxauh2D05BMh17RW/IaP0lkqWs3wSrXMhfq', // password
+        'email'             => 'admin@mail.ru',
+        'email_verified_at' => now(),
+        'password'          => bcrypt('iamadmin'),
         'remember_token'    => Str::random(10),
     ];
 });

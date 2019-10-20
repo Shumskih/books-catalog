@@ -57,4 +57,4 @@
     <img src="/storage/{{ $book->cover }}" alt="{{ $book->title }}" class="img-thumbnail mb-3"/>
 @endif
 <button type="submit" class="btn btn-outline-success">Save</button>
-<a href="{{ route('books') }}" class="btn btn-outline-secondary">Back</a>
+<a href="{{ URL::previous() }}" class="btn btn-outline-secondary">Back</a>

@@ -8,4 +8,4 @@
     <input type="text" class="form-control" id="name" placeholder="Enter author's surname" @if($author->surname ?? '') value="{{ $author->surname ?? '' }}" @else value="{{ \Illuminate\Support\Facades\Request::old('surname') }}" @endif name="surname">
 </div>
 <button type="submit" class="btn btn-outline-success">Save</button>
-<a href="{{ route('authors') }}" class="btn btn-outline-secondary">Back</a>
+<a href="{{ URL::previous() }}" class="btn btn-outline-secondary">Back</a>

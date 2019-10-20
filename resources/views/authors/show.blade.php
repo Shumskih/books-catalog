@@ -24,12 +24,14 @@
                                  width="50" height="50" class="mr-2"> {{ $book->title }}
                         </td>
                         <td>
-                            <a href="{{ route('book.show', ['id' => $book->id]) }}"
-                               class="btn btn-outline-secondary">Show</a>
-                            <a href="{{ route('book.edit', ['id' => $book->id]) }}"
-                               class="btn btn-outline-info">Edit</a>
-                            <a href="{{ route('book.delete', ['id' => $book->id]) }}"
-                               class="btn btn-outline-danger">Delete</a>
+                            @if (Auth::user()->isAdmin())
+                                <a href="{{ route('book.show', ['id' => $book->id]) }}"
+                                   class="btn btn-outline-secondary">Show</a>
+                                <a href="{{ route('book.edit', ['id' => $book->id]) }}"
+                                   class="btn btn-outline-info">Edit</a>
+                                <a href="{{ route('book.delete', ['id' => $book->id]) }}"
+                                   class="btn btn-outline-danger">Delete</a>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
@@ -44,6 +46,6 @@
         </table>
     </div>
     <div class="row justify-content-center mt-5">
-        <a href="{{ route('authors') }}" class="btn btn-outline-dark">Back</a>
+        <a href="{{ URL::previous() }}" class="btn btn-outline-dark">Back</a>
     </div>
 @endsection

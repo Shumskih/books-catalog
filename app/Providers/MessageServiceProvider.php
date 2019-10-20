@@ -2,11 +2,11 @@
 
 namespace App\Providers;
 
-use App\Custom\Services\CleanStorageDir\CleanStorageDir;
+use App\Custom\Services\Messages\Messages;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 
-class CleanStorageDirServiceProvider extends ServiceProvider
+class MessageServiceProvider extends ServiceProvider
 {
 
     protected $defer = true;
@@ -18,13 +18,13 @@ class CleanStorageDirServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        App::bind('cleanStorageDir', function() {
-            return new CleanStorageDir;
+        App::bind('message', function () {
+            return new Messages;
         });
     }
 
     public function provides()
     {
-        return [CleanStorageDir::class];
+        return [Messages::class];
     }
 }

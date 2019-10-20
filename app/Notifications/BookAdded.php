@@ -2,14 +2,12 @@
 
 namespace App\Notifications;
 
-use App\Mail\BookAddedMail;
+use App\Channels\TelegramChannel;
+use App\Custom\Facades\MessagesService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\Facades\Mail;
-use NotificationChannels\Telegram\TelegramChannel;
-use NotificationChannels\Telegram\TelegramMessage;
 
 class BookAdded extends Notification
 {
@@ -44,6 +42,7 @@ class BookAdded extends Notification
         return [
             'slack',
             'mail',
+            TelegramChannel::class
         ];
     }
 
@@ -64,12 +63,10 @@ class BookAdded extends Notification
             ->content($this->message());
     }
 
-    //    public function toTelegram()
-    //    {
-    //        return TelegramMessage::create()
-    //                              ->to('@guttatus.ru')
-    //                              ->content($this->message());
-    //    }
+    public function toTelegram($notifiable)
+    {
+        return MessagesService::toTelegram($this->message());
+    }
 
     private function message(): string
     {

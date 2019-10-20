@@ -24,7 +24,7 @@ class BookController extends Controller
     {
         $books = Book::latest()->paginate(5);
 
-        return view('admin.book.index')->with('books', $books);
+        return view('books.index')->with('books', $books);
     }
 
     /**
@@ -70,7 +70,7 @@ class BookController extends Controller
     {
         $book = Book::find($id);
 
-        return view('admin.book.show')->with('book', $book);
+        return view('books.show')->with('book', $book);
     }
 
     /**
@@ -91,8 +91,7 @@ class BookController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int                      $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */

@@ -4,11 +4,7 @@ namespace App\Events;
 
 use App\Models\Book;
 use App\User;
-use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
@@ -17,12 +13,12 @@ class NewBookAddedEvent
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
-     * @var \App\Events\User
+     * @var \App\User
      */
     public $user;
 
     /**
-     * @var \App\Events\Book
+     * @var \App\Models\Book
      */
     public $book;
 

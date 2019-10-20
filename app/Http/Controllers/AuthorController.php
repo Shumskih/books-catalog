@@ -17,7 +17,7 @@ class AuthorController extends Controller
     {
         $authors = Author::latest()->paginate(5);
 
-        return view('admin.author.index')->with('authors', $authors);
+        return view('authors.index')->with('authors', $authors);
     }
 
     /**
@@ -54,7 +54,7 @@ class AuthorController extends Controller
     {
         $author = Author::find($id);
 
-        return view('admin.author.show')->with('author', $author);
+        return view('authors.show')->with('author', $author);
     }
 
     /**

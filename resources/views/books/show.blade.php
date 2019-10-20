@@ -25,8 +25,10 @@
         </div>
     </div>
     <div class="row justify-content-center mt-5">
-        <a href="{{ route('books') }}" class="btn btn-outline-dark mr-1">Back</a>
-        <a href="{{ route('book.edit', $book->id) }}" class="btn btn-outline-info mr-1">Edit</a>
-        <a href="{{ route('book.delete', $book->id) }}" class="btn btn-outline-danger">Delete</a>
+        <a href="{{ URL::previous() }}" class="btn btn-outline-dark mr-1">Back</a>
+        @if (Auth::user()->isAdmin())
+            <a href="{{ route('book.edit', $book->id) }}" class="btn btn-outline-info mr-1">Edit</a>
+            <a href="{{ route('book.delete', $book->id) }}" class="btn btn-outline-danger">Delete</a>
+        @endif
     </div>
 @endsection

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateAuthor;
 use App\Models\Author;
-use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
@@ -31,13 +31,13 @@ class AuthorController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param \App\Http\Requests\CreateAuthor $request
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateAuthor $request)
     {
-        Author::create($this->validateRequest());
+        Author::create($this->validateRequest($request));
 
         return redirect()->route('authors');
     }
@@ -71,14 +71,14 @@ class AuthorController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int                      $id
+     * @param \App\Http\Requests\CreateAuthor $request
+     * @param int                             $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateAuthor $request, $id)
     {
-        Author::updateOrCreate(['id'=>$id], $this->validateRequest());
+        Author::updateOrCreate(['id'=>$id], $this->validateRequest($request));
 
         return redirect()->route('authors');
     }
@@ -97,11 +97,8 @@ class AuthorController extends Controller
         return redirect()->route('authors');
     }
 
-    private function validateRequest()
+    private function validateRequest(CreateAuthor $request)
     {
-        return request()->validate([
-            'name' => 'required',
-            'surname' => 'required'
-        ]);
+        return $request->validated();
     }
 }

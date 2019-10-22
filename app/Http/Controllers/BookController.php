@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Events\NewBookAddedEvent;
+use App\Http\Requests\CreateBook;
+use App\Http\Requests\UploadImage;
 use App\Mail\BookAddedMail;
 use App\Models\Author;
 use App\Models\Book;
@@ -42,11 +44,13 @@ class BookController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param \App\Http\Requests\CreateBook $cbRequest
+     *
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(CreateBook $cbRequest)
     {
-        $book    = Book::create($this->validateRequest());
+        $book    = Book::create($this->validateRequest($cbRequest));
         $authors = request()->get('author');
         foreach ($authors as $author) {
             $book->authors()->attach($author);
@@ -91,11 +95,12 @@ class BookController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param int $id
+     * @param \App\Http\Requests\CreateBook $cbRequest
+     * @param int                           $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(CreateBook $cbRequest, $id)
     {
         $book = Book::find($id);
         foreach ($book->authors as $author) {
@@ -109,7 +114,7 @@ class BookController extends Controller
 
         $this->checkImageAndDelete($book);
 
-        $book->update($this->validateRequest());
+        $book->update($this->validateRequest($cbRequest));
         $this->storeImage($book);
 
         return redirect()->route('book.show', $book->id);
@@ -135,21 +140,9 @@ class BookController extends Controller
         return redirect()->route('books');
     }
 
-    private function validateRequest()
+    private function validateRequest(CreateBook $cbRequest)
     {
-        return tap(request()->validate(
-            [
-                'title'        => 'required|min:1',
-                'description'  => 'required|min:10',
-                'num_of_pages' => 'required|numeric',
-            ]
-        ), function () {
-            if (request()->hasFile('cover')) {
-                request()->validate([
-                    'cover' => 'file|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                ]);
-            }
-        });
+        return $cbRequest->validated();
     }
 
     private function storeImage($book)

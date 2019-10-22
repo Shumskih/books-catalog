@@ -10644,3 +10644,24 @@ a.text-dark:focus {
   }
 }
 
+@media (min-width: 576px) {
+  .line {
+    border-bottom: 1px solid #9EC1D4;
+    padding-left: 10px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .card-columns {
+    -moz-column-count: 2;
+         column-count: 2;
+  }
+}
+
+@media (min-width: 992px) {
+  .card-columns {
+    -moz-column-count: 3;
+         column-count: 3;
+  }
+}
+

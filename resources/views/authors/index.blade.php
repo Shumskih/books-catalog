@@ -9,42 +9,24 @@
             <a href="{{ route('author.create') }}">Create new author</a>
         </div>
     @endif
-    <div class="row justify-content-center">
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th scope="col">Authors</th>
-                @if (Auth::user()->isAdmin())
-                    <th scope="col">Actions</th>
-                @endif
-            </tr>
-            </thead>
-            <tbody>
-            @foreach ($authors as $author)
-                <tr>
-                    <td>
-                        {{ $author->surname }}, {{ $author->name }} <strong>({{ $author->books->count() }}
-                            )</strong>
-                    </td>
-                    @if (Auth::user()->isAdmin())
-                        <td>
-                            <a href="{{ route('author.show', ['id' => $author->id]) }}"
-                               class="btn btn-outline-secondary">Show</a>
-                            <a href="{{ route('author.edit', ['id' => $author->id]) }}"
-                               class="btn btn-outline-info">Edit</a>
-                            <a href="{{ route('author.delete', ['id' => $author->id]) }}"
-                               class="btn btn-outline-danger">Delete</a>
-                        </td>
-                    @endif
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
-    </div>
-    <div class="d-flex flex-column">
+    <div class="d-flex flex-column col-xl-6 col-lg-10 col-md-12 col-sm-12 mx-auto">
         @foreach($authors as $author)
-            <div class="p-2">
-                <a href="/author/{{ $author->id }}">{{ $author->surname }}, {{ $author->name }}</a>
+            <div class="d-flex flex-column flex-sm-row p-1 mx-auto mx-sm-0 line mb-2 mb-sm-0">
+                <div class="mr-auto">
+                    <a href="/author/{{ $author->id }}"
+                       class="text-secondary">{{ $author->surname }} {{ $author->name }}
+                        <strong>({{ $author->books->count() }})</strong></a>
+                </div>
+                <div class="mx-auto mx-sm-0">
+                    <a href="{{ route('author.show', ['id' => $author->id]) }}"
+                       class="btn btn-outline-secondary btn-sm mr-1 d-none d-md-inline-block">Show</a>
+                    @if (Auth::user()->isAdmin())
+                        <a href="{{ route('author.edit', ['id' => $author->id]) }}"
+                           class="btn btn-outline-info btn-sm mr-1">Edit</a>
+                        <a href="{{ route('author.delete', ['id' => $author->id]) }}"
+                           class="btn btn-outline-danger btn-sm mr-1">Delete</a>
+                    @endif
+                </div>
             </div>
         @endforeach
     </div>

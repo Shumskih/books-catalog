@@ -22,7 +22,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::latest()->paginate(5);
+        $books = Book::latest()->paginate(6);
 
         return view('books.index')->with('books', $books);
     }

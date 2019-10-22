@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Author;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
 class AuthorController extends Controller
 {
@@ -15,11 +14,10 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $authors = Author::latest()->paginate(5);
+        $authors = Author::latest()->paginate(10);
 
         return view('authors.index')->with('authors', $authors);
     }
-
     /**
      * Show the form for creating a new resource.
      *

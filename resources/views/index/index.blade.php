@@ -18,7 +18,7 @@
                     @foreach($author->books as $book)
                         <li class="list-group-item">
                             <a href="/book/{{ $book->id }}">
-                                <img @if($book->cover) src="/uploads/{{ $book->cover }}"
+                                <img @if($book->cover) src="/storage/{{ $book->cover }}"
                                      @else src="https://fakeimg.pl/350x200/?text=No Image"
                                      @endif alt=""
                                      width="25" height="25" class="mr-2">{{ $book->title }}

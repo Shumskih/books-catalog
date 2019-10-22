@@ -10,54 +10,41 @@
         </div>
     @endif
     <div class="row justify-content-center">
-        <table class="table table-hover col-xl-12">
-            <thead>
-            <tr>
-                <th scope="col">Cover</th>
-                <th scope="col">Authors</th>
-                <th scope="col">Title</th>
-                <th scope="col">Pages</th>
-                @if (Auth::user()->isAdmin())
-                    <th scope="col">Actions</th>
-                @endif
-            </tr>
-            </thead>
-            <tbody>
+        <div class="card-columns">
             @foreach ($books as $book)
-                <tr>
-                    <td>
+                <div class="card">
+                    <a href="/book/{{ $book->id }}" class="text-dark">
                         <img @if($book->cover) src="/storage/{{ $book->cover }}"
                              @else src="https://fakeimg.pl/350x200/?text=No Image" @endif alt="{{ $book->title }}"
-                             width="50" height="50">
-                    </td>
-                    <td>
-                        @foreach($book->authors as $author)
-                            {{ $author->surname }}, {{ $author->name }}
-                        @endforeach
-                        @if(count($book->authors) < 1)
-                            ==//==
-                        @endif
-                    </td>
-                    <td>
-                        {{ $book->title }}
-                    </td>
-                    <td>
-                        {{ $book->num_of_pages }}
-                    </td>
+                             class="card-img-top">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="/book/{{ $book->id }}" class="text-dark">{{ $book->title }}</a>
+                        </h5>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                @foreach($book->authors as $author)
+                                    <a href="/author/{{ $author->id }}" class="text-muted">{{ $author->surname }}
+                                        , {{ $author->name }}</a>
+                                @endforeach
+                            </small>
+                        </p>
+                        <p class="card-text">
+                            <a href="/book/{{ $book->id }}" class="text-black-50">{{ $book->description }}</a>
+                        </p>
+                    </div>
                     @if (Auth::user()->isAdmin())
-                        <td>
-                            <a href="{{ route('book.show', ['id' => $book->id]) }}"
-                               class="btn btn-outline-secondary">Show</a>
+                        <div class="d-flex flex-row justify-content-center pb-1">
                             <a href="{{ route('book.edit', ['id' => $book->id]) }}"
-                               class="btn btn-outline-info">Edit</a>
+                               class="btn btn-outline-info mr-1">Edit</a>
                             <a href="{{ route('book.delete', ['id' => $book->id]) }}"
                                class="btn btn-outline-danger">Delete</a>
-                        </td>
+                        </div>
                     @endif
-                </tr>
+                </div>
             @endforeach
-            </tbody>
-        </table>
+        </div>
     </div>
     <div class="row justify-content-center col-xl-12 mt-5">
         {{ $books->links() }}

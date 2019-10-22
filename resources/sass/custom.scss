@@ -1,0 +1,15 @@
+@media (min-width: 576px) {
+    .line {
+        border-bottom:1px solid #9EC1D4;
+        padding-left:10px
+    }
+}
+
+.card-columns {
+    @include media-breakpoint-down(md) {
+        column-count: 2;
+    }
+    @include media-breakpoint-up(lg) {
+        column-count: 3;
+    }
+}

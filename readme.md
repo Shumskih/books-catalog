@@ -4,10 +4,18 @@
 php artisan migrate:fresh --seed
 
 
-http://84.201.186.9/
+http://37.228.117.229/
 
-####Test user:
+##Test users.
+### Admin:
 
 login: admin@mail.ru
 
 password: iamadmin
+
+### User:
+
+login: user@mail.ru
+
+password: iamuser
+

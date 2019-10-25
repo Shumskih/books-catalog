@@ -15,10 +15,6 @@ use Symfony\Component\HttpFoundation\Response;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::group(['prefix' => 'v1/books'], function () {
     //books
     Route::get('/list', 'Api\BookController@index');
@@ -26,3 +22,6 @@ Route::group(['prefix' => 'v1/books'], function () {
     Route::post('/update/{id}', 'Api\BookController@update');
     Route::delete('/{id}', 'Api\BookController@destroy');
 });
+
+Route::get('/search-authors', 'SearchController@searchAuthors');
+Route::get('/search-books', 'SearchController@searchBooks');

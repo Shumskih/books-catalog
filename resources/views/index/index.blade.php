@@ -4,9 +4,11 @@
 
 @section('content')
     @if(Session::has('denied'))
-        <p class="alert alert-danger mt-3">{{ Session::get('denied') }}</p>
+        <p class="alert alert-danger mt-1">{{ Session::get('denied') }}</p>
     @endif
-
+    <div id="#app">
+        <search-authors-component></search-authors-component>
+    </div>
     @foreach ($authors as $author)
         <div class="row justify-content-xl-center">
             <h5 class="mt-5"><a href="/author/{{ $author->id }}" class="text-secondary">{{ $author->surname }}

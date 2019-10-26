@@ -19,8 +19,7 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('search-authors-component', require('./components/SearchAuthorsComponent.vue'));
-Vue.component('search-books-component', require('./components/SearchBooksComponent.vue'));
+Vue.component('main-component', require('./components/MainComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -29,13 +28,13 @@ Vue.component('search-books-component', require('./components/SearchBooksCompone
  */
 
 function debounce(fn, delay = 300) {
-    var timeoutID = null;
+    let timeoutID = null;
 
     return function () {
         clearTimeout(timeoutID);
 
-        var args = arguments;
-        var that = this;
+        const args = arguments;
+        const that = this;
 
         timeoutID = setTimeout(function () {
             fn.apply(that, args);
@@ -56,8 +55,5 @@ Vue.directive('debounce', (el, binding) => {
 
 const app = new Vue({
     el: '#app',
-    template: [
-        '<search-authors-component></search-authors-component>',
-        '<search-books-component></search-books-component>'
-    ]
+    template: '<main-component></main-component>'
 });

@@ -21,8 +21,7 @@
         data() {
             return {
                 keywords: null,
-                results: [],
-                url: '/storage'
+                results: []
             }
         },
 
@@ -34,10 +33,12 @@
 
         methods: {
             fetch() {
-                axios.get('/api/search', {params: {keywords: trim(this.keywords)}})
-                    .then(response => this.results = response.data)
-                    .catch(error => {
-                    });
+                if (this.keywords > 1) {
+                    axios.get('/api/search', {params: {keywords: trim(this.keywords)}})
+                        .then(response => this.results = response.data)
+                        .catch(error => {
+                        });
+                }
             }
         }
     }

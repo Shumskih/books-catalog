@@ -20,12 +20,16 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div>
-        @include('includes.navbar')
+<div>
+    @include('includes.navbar')
 
-        <main class="py-4 container col-xl-11 col-lg-11 col-md-11 col-sm-11 col-11">
-            @yield('content')
-        </main>
-    </div>
+    <main class="py-4 container col-xl-11 col-lg-11 col-md-11 col-sm-11 col-11">
+        @if (\Illuminate\Support\Facades\Request::route()->getName() == 'index' ||
+            \Illuminate\Support\Facades\Request::route()->getName() == 'authors')
+            <div id="app"></div>
+        @endif
+        @yield('content')
+    </main>
+</div>
 </body>
 </html>

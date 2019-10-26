@@ -7,6 +7,7 @@ php artisan migrate:fresh --seed
 http://37.228.117.229/
 
 ##Test users.
+
 ### Admin:
 
 login: admin@mail.ru
